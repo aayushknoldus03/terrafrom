@@ -9,6 +9,5 @@ trigger:
 pool: ubuntupool
 
 steps:
-- script: echo Hello, world!
-- template : 2_azure-pipelines-template.yml
+- script: echo The first pipeline!
   
