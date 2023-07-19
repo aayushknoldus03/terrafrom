@@ -10,5 +10,5 @@ pool: ubuntupool
 
 steps:
 - script: echo Hello, world!
-- template : 2_azure-piplelines-template.yml
+- template : 2_azure-pipelines-template.yml
   
