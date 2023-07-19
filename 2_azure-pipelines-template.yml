@@ -6,6 +6,6 @@ name: secondPipeline
 resources:
  pipelines:
      - pipeline: previous-pipeline-trigger
-       source: first-pipeline-yaml
+       source: my-first-pipeline-yaml
 steps:
 - script: echo this is the triggered pipeline
