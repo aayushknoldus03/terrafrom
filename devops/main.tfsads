@@ -1,0 +1,54 @@
+terraform {
+  required_providers {
+    azuredevops = {
+      source  = "microsoft/azuredevops"
+      version = ">=0.1.0"
+    }
+  }
+}
+
+provider "azuredevops" {
+  personal_access_token = var.personal_access_token
+  org_service_url       = "https://dev.azure.com/aayushbisht0173"
+}
+
+resource "azuredevops_project" "example" {
+  name               = "Terraform Project"
+  visibility         = "private"
+  version_control    = "Git"
+  work_item_template = "Agile"
+}
+
+# resource "azuredevops_git_repository" "example" {
+#   project_id     = azuredevops_project.example.id
+#   name           = "Example Empty Git Repository"
+#   default_branch = "refs/heads/main"
+#   initialization {
+#     init_type = "clean"
+#   }
+# }
+
+
+resource "azuredevops_git_repository" "example-import" {
+  project_id = azuredevops_project.example.id
+  name       = "github-repo"
+  initialization {
+    init_type   = "Import"
+    source_type = "Git"
+    source_url  = "https://github.com/aayushknoldus03/gitcleancode"
+  }
+}
+resource "azuredevops_git_repository_file" "example" {
+  repository_id       = azuredevops_git_repository.example-import.id
+  file                = "HELLO.java"
+  branch              = "refs/heads/main"
+  commit_message      = "java code"
+  content = "class Hello{public static void main(String[] args){System.out.println(+${var.java});}}"
+  overwrite_on_create = false
+  depends_on = [ azuredevops_git_repository_branch.example ]
+}
+resource "azuredevops_git_repository_branch" "example" {
+  repository_id = azuredevops_git_repository.example-import.id
+  name          = "terraform"
+  ref_branch    = azuredevops_git_repository.example-import.default_branch
+}
