@@ -1,0 +1,6 @@
+resource_group_name = "aks"
+location = "brazilsouth"
+cluster_name = "my-cluster"
+dns_prefix = "aks-k8s"
+client_id = "fe20656b-f384-498c-b7f7-a527c1abaca4"
+client_secret = "o7B8Q~zHw1yI2hYq7kQAHKfKdIWpPHolT3b5~bAA"
