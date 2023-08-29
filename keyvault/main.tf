@@ -2,9 +2,6 @@
 
 data "azurerm_client_config" "current" {}
 
-# data "azuread_user" "user_data" {
-#   user_principal_name = "baka@manjarisrivastav3gmail.onmicrosoft.com"
-# }
 
 resource "azurerm_key_vault" "keyvault" {
   name                        = var.keyvault_name
